@@ -45,6 +45,11 @@
   <ItemGroup>
     <Compile Include="Collection\IOrderedDictionary.cs" />
     <Compile Include="Collection\OrderedDictionary.cs" />
+    <Compile Include="ComponentModel\AliasNameAttribute.cs" />
+    <Compile Include="ComponentModel\ResourceAliasNameAttribute.cs" />
+    <Compile Include="ComponentModel\ResourceCategoryAttribute.cs" />
+    <Compile Include="ComponentModel\ResourceDescriptionAttribute.cs" />
+    <Compile Include="ComponentModel\ResourceDisplayNameAttribute.cs" />
     <Compile Include="DataUri.cs" />
     <Compile Include="Lazy.cs" />
     <Compile Include="ObjectUtils.cs" />
