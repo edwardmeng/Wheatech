@@ -120,8 +120,17 @@
   <data name="Ambiguous_type" xml:space="preserve">
     <value>The type '{0}' is ambiguous: it could come from assembly '{1}' or from assembly '{2}'. Please specify the assembly explicitly in the type name.</value>
   </data>
+  <data name="ArgumentOutOfRange_Index" xml:space="preserve">
+    <value>Index was out of range. Must be non-negative and less than the size of the collection.</value>
+  </data>
+  <data name="ArgumentOutOfRange_NeedNonNegNum" xml:space="preserve">
+    <value>'{0}' must be non-negative.</value>
+  </data>
   <data name="Argument_Cannot_Be_Null_Or_Empty" xml:space="preserve">
     <value>Value cannot be null or an empty string.</value>
+  </data>
+  <data name="Arg_WrongType" xml:space="preserve">
+    <value>The value "{0}" is not of type "{1}" and cannot be used in this generic collection.</value>
   </data>
   <data name="Cannot_Convert_Field" xml:space="preserve">
     <value>The field value '{0}' cannot be converted to {1} for the component property '{2}'.</value>

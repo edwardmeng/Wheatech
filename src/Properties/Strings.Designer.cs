@@ -70,11 +70,38 @@ namespace Wheatech.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The value &quot;{0}&quot; is not of type &quot;{1}&quot; and cannot be used in this generic collection. 的本地化字符串。
+        /// </summary>
+        internal static string Arg_WrongType {
+            get {
+                return ResourceManager.GetString("Arg_WrongType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Value cannot be null or an empty string. 的本地化字符串。
         /// </summary>
         internal static string Argument_Cannot_Be_Null_Or_Empty {
             get {
                 return ResourceManager.GetString("Argument_Cannot_Be_Null_Or_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Index was out of range. Must be non-negative and less than the size of the collection. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentOutOfRange_Index {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &apos;{0}&apos; must be non-negative. 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentOutOfRange_NeedNonNegNum {
+            get {
+                return ResourceManager.GetString("ArgumentOutOfRange_NeedNonNegNum", resourceCulture);
             }
         }
         
