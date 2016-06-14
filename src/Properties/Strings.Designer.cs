@@ -88,6 +88,15 @@ namespace Wheatech.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The type &apos;{0}&apos; is not an enumeration. 的本地化字符串。
+        /// </summary>
+        internal static string Argument_MustBeEnum {
+            get {
+                return ResourceManager.GetString("Argument_MustBeEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Index was out of range. Must be non-negative and less than the size of the collection. 的本地化字符串。
         /// </summary>
         internal static string ArgumentOutOfRange_Index {

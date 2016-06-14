@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +47,9 @@
     <Compile Include="Collection\IOrderedDictionary.cs" />
     <Compile Include="Collection\OrderedDictionary.cs" />
     <Compile Include="ComponentModel\AliasNameAttribute.cs" />
+    <Compile Include="ComponentModel\EnumerationDescriptor.cs" />
+    <Compile Include="ComponentModel\EnumerationMemberDescriptor.cs" />
+    <Compile Include="ComponentModel\EnumerationMemberDescriptorCollection.cs" />
     <Compile Include="ComponentModel\ResourceAliasNameAttribute.cs" />
     <Compile Include="ComponentModel\ResourceCategoryAttribute.cs" />
     <Compile Include="ComponentModel\ResourceDescriptionAttribute.cs" />

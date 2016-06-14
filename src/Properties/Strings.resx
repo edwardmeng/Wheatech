@@ -129,6 +129,9 @@
   <data name="Argument_Cannot_Be_Null_Or_Empty" xml:space="preserve">
     <value>Value cannot be null or an empty string.</value>
   </data>
+  <data name="Argument_MustBeEnum" xml:space="preserve">
+    <value>The type '{0}' is not an enumeration.</value>
+  </data>
   <data name="Arg_WrongType" xml:space="preserve">
     <value>The value "{0}" is not of type "{1}" and cannot be used in this generic collection.</value>
   </data>
