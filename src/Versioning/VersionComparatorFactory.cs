@@ -6,6 +6,9 @@ using Wheatech.Properties;
 
 namespace Wheatech
 {
+    /// <summary>
+    /// The static class to parse string representation to version comparator.
+    /// </summary>
     public static class VersionComparatorFactory
     {
         private static bool TryParseByBrakets(string value, out VersionComparator lowerBound, out VersionComparator upperBound)
@@ -358,6 +361,12 @@ namespace Wheatech
             }
         }
 
+        /// <summary>
+        /// Converts the string to the equivalent version comparator.
+        /// </summary>
+        /// <param name="value">The string to convert.</param>
+        /// <param name="comparator">The instance that will contain the parsed value. If the method returns <c>true</c>, result contains a valid version comparator. If the method returns <c>false</c>, result is null.</param>
+        /// <returns><c>true</c> if the parse operation was successful; otherwise, <c>false</c>.</returns>
         public static bool TryParse(string value, out IVersionComparator comparator)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
@@ -367,12 +376,18 @@ namespace Wheatech
             return TryParseExpression(value, out comparator);
         }
 
+        /// <summary>
+        /// Converts the string to the equivalent version comparator.
+        /// </summary>
+        /// <param name="value">The string to convert.</param>
+        /// <returns>The instance that contains the value that was parsed.</returns>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is null or not in a recognized format.</exception>
         public static IVersionComparator Parse(string value)
         {
             IVersionComparator comparator;
             if (!TryParse(value, out comparator))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, Strings.InvalidVersion, value), "value");
+                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, Strings.InvalidVersion, value), nameof(value));
             }
             return comparator;
         }

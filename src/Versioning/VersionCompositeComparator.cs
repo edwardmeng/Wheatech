@@ -152,12 +152,12 @@ namespace Wheatech
         /// </summary>
         /// <param name="version">SemVer to compare.</param>
         /// <returns>True if the given version meets the version requirements.</returns>
-        public bool Satisfies(Version version)
+        public bool Match(Version version)
         {
             if (version == null) throw new ArgumentNullException(nameof(version));
             return _compositor == VersionCompositor.And
-                ? _comparators.All(comparator => comparator.Satisfies(version))
-                : _comparators.Any(comparator => comparator.Satisfies(version));
+                ? _comparators.All(comparator => comparator.Match(version))
+                : _comparators.Any(comparator => comparator.Match(version));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Wheatech
         public bool Satisfies(System.Version version)
         {
             if (version == null) throw new ArgumentNullException(nameof(version));
-            return Satisfies(new Version(version));
+            return Match(new Version(version));
         }
 
         public override string ToString()

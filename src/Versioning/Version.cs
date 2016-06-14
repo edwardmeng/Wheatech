@@ -24,95 +24,104 @@ namespace Wheatech
         #region Constructors
 
         /// <summary>
-        /// Creates a SemanticVersion using SemanticVersion.Parse(string)
+        /// Creates a Version using Version.Parse(string)
         /// </summary>
         /// <param name="version">Version string</param>
+        /// <exception cref="ArgumentException"><paramref name="version"/> is null, empty string or invalid format.</exception>
         public Version(string version)
             : this(Parse(version))
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion from an existing SemanticVersion
+        /// Creates a Version from an existing Version
         /// </summary>
+        /// <exception cref="ArgumentNullException"><paramref name="version"/> is null.</exception>
         public Version(Version version)
-            : this(version.Major, version.Minor, version.Patch, version.ReleaseLabels, version.Metadata)
+            : this(version?.Major ?? 0, version?.Minor ?? 0, version?.Patch ?? 0, version?.ReleaseLabels ?? Enumerable.Empty<string>(), version?.Metadata)
         {
+            if (version == null) throw new ArgumentNullException(nameof(version));
         }
 
         /// <summary>
-        /// Creates a SemanticVersion X.Y.Z
+        /// Creates a Version X.Y.Z
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
         /// <param name="patch">x.y.Z</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch)
             : this(major, minor, patch, Enumerable.Empty<string>(), null)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion X.Y.Z-alpha
+        /// Creates a Version X.Y.Z-alpha
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
         /// <param name="patch">x.y.Z</param>
         /// <param name="releaseLabel">Prerelease label</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, string releaseLabel)
             : this(major, minor, patch, releaseLabel, null)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion X.Y.Z-alpha+build01
+        /// Creates a Version X.Y.Z-alpha+build01
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
         /// <param name="patch">x.y.Z</param>
         /// <param name="releaseLabel">Prerelease label</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, string releaseLabel, string metadata)
             : this(major, minor, patch, ParseReleaseLabels(releaseLabel), metadata)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion X.Y.Z-alpha.1.2+build01
+        /// Creates a Version X.Y.Z-alpha.1.2+build01
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
         /// <param name="patch">x.y.Z</param>
         /// <param name="releaseLabels">Release labels that have been split by the dot separator</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, IEnumerable<string> releaseLabels, string metadata)
             : this(new System.Version(major, minor, patch, 0), releaseLabels, metadata)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion from a .NET Version with additional release labels, build metadata.
+        /// Creates a Version from a .NET Version with additional release labels, build metadata.
         /// </summary>
         /// <param name="version">Version numbers</param>
         /// <param name="releaseLabel">prerelease labels</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentNullException"><paramref name="version"/> is null.</exception>
         public Version(System.Version version, string releaseLabel = null, string metadata = null)
             : this(version, ParseReleaseLabels(releaseLabel), metadata)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion W.X.Y.Z
+        /// Creates a Version W.X.Y.Z
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
         /// <param name="patch">w.x.Y.z</param>
         /// <param name="revision">w.x.y.Z</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, int revision)
             : this(major, minor, patch, revision, Enumerable.Empty<string>(), null)
         {
         }
         /// <summary>
-        /// Creates a SemanticVersion W.X.Y.Z-alpha+build01
+        /// Creates a Version W.X.Y.Z-alpha+build01
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
@@ -120,13 +129,14 @@ namespace Wheatech
         /// <param name="revision">w.x.y.Z</param>
         /// <param name="releaseLabel">Prerelease label</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, int revision, string releaseLabel, string metadata)
             : this(major, minor, patch, revision, ParseReleaseLabels(releaseLabel), metadata)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion W.X.Y.Z-alpha.1+build01
+        /// Creates a Version W.X.Y.Z-alpha.1+build01
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
@@ -134,17 +144,19 @@ namespace Wheatech
         /// <param name="revision">w.x.y.Z</param>
         /// <param name="releaseLabels">Prerelease labels</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="major"/> or <paramref name="minor"/> is negative number.</exception>
         public Version(int major, int minor, int patch, int revision, IEnumerable<string> releaseLabels, string metadata)
             : this(new System.Version(major, minor, patch, revision), releaseLabels, metadata)
         {
         }
 
         /// <summary>
-        /// Creates a SemanticVersion from a .NET Version with additional release labels, build metadata.
+        /// Creates a Version from a .NET Version with additional release labels, build metadata.
         /// </summary>
         /// <param name="version">Version numbers</param>
         /// <param name="releaseLabels">prerelease labels</param>
         /// <param name="metadata">Build metadata</param>
+        /// <exception cref="ArgumentNullException"><paramref name="version"/> is null.</exception>
         public Version(System.Version version, IEnumerable<string> releaseLabels, string metadata)
         {
             if (version == null)
@@ -227,6 +239,12 @@ namespace Wheatech
             return ToString("N", new VersionFormatter());
         }
 
+        /// <summary>
+        /// Converts the value of the current Version object to its equivalent string representation using the specified format and culture-specific format information.
+        /// </summary>
+        /// <param name="format">A standard or custom date and time format string.</param>
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+        /// <returns>A string representation of value of the current Version object as specified by format and provider.</returns>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             string formattedString;
@@ -259,14 +277,26 @@ namespace Wheatech
 
         #region Compare
 
-        public int CompareTo(object obj)
+        /// <summary>
+        /// Compares the value of this instance to a specified object that contains a specified <see cref="Version"/> value, 
+        /// and returns an integer that indicates whether this instance is less than, the same as, or greater than the specified <see cref="Version"/> value.
+        /// </summary>
+        /// <param name="value">A boxed object to compare, or null.</param>
+        /// <returns>A signed number indicating the relative values of this instance and value.</returns>
+        public int CompareTo(object value)
         {
-            return CompareTo(obj as Version);
+            return CompareTo(value as Version);
         }
 
-        public int CompareTo(Version other)
+        /// <summary>
+        /// Compares the value of this instance to a specified <see cref="Version"/> value and returns an integer 
+        /// that indicates whether this instance is less than, the same as, or greater than the specified <see cref="Version"/> value.
+        /// </summary>
+        /// <param name="value">The object to compare to the current instance.</param>
+        /// <returns>A signed number indicating the relative values of this instance and the value parameter.</returns>
+        public int CompareTo(Version value)
         {
-            return CompareTo(other, VersionComparison.Default);
+            return CompareTo(value, VersionComparison.Default);
         }
 
         /// <summary>
@@ -288,27 +318,44 @@ namespace Wheatech
 
         #region Equals
 
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
             return VersionComparer.Default.GetHashCode(this);
         }
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="value">The object to compare to this instance.</param>
+        /// <returns><c>true</c> if <paramref name="value"/> is an instance of <see cref="Version"/> and equals the value of this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object value)
         {
-            return Equals(obj as Version);
-        }
-
-        public bool Equals(Version other)
-        {
-            return Equals(other, VersionComparison.Default);
+            return Equals(value as Version);
         }
 
         /// <summary>
-        /// True if the VersionBase objects are equal based on the given comparison mode.
+        /// Returns a value indicating whether the value of this instance is equal to the value of the specified <see cref="Version"/> instance.
         /// </summary>
-        public bool Equals(Version other, VersionComparison versionComparison)
+        /// <param name="value">The object to compare to this instance.</param>
+        /// <returns><c>true</c> if the <paramref name="value"/> parameter equals the value of this instance; otherwise, <c>false</c>.</returns>
+        public bool Equals(Version value)
         {
-            return CompareTo(other, versionComparison) == 0;
+            return Equals(value, VersionComparison.Default);
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the value of this instance is equal to the value of the specified <see cref="Version"/> instance based on the given comparison mode.
+        /// </summary>
+        /// <param name="value">The object to compare to this instance.</param>
+        /// <param name="versionComparison">One of the enumeration values that specifies how the versions will be compared.</param>
+        /// <returns><c>true</c> if the <paramref name="value"/> parameter equals the value of this instance; otherwise, <c>false</c>.</returns>
+        public bool Equals(Version value, VersionComparison versionComparison)
+        {
+            return CompareTo(value, versionComparison) == 0;
         }
 
         #endregion
@@ -504,8 +551,9 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Parses a SemVer string using strict SemVer rules.
+        /// Parses a version string using strict version rules.
         /// </summary>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is null, empty string or invalid format.</exception>
         public static Version Parse(string value)
         {
             if (IsNullOrEmpty(value))

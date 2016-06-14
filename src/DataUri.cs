@@ -252,7 +252,7 @@ namespace Wheatech
         /// Converts the string to the equivalent data URI.
         /// </summary>
         /// <param name="uriString">The string to convert.</param>
-        /// <param name="uri">The instance that will contain the parsed value. If the method returns true, result contains a valid data URI. If the method returns false, result is null.</param>
+        /// <param name="uri">The instance that will contain the parsed value. If the method returns <c>true</c>, result contains a valid data URI. If the method returns <c>false</c>, result is null.</param>
         /// <returns><c>true</c> if the parse operation was successful; otherwise, <c>false</c>.</returns>
         public static bool TryParse(string uriString, out DataUri uri)
         {

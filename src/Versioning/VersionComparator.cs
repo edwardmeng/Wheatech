@@ -77,7 +77,7 @@ namespace Wheatech
         /// <summary>
         /// True if the given version falls into the floating range.
         /// </summary>
-        public bool Satisfies(Version version)
+        public bool Match(Version version)
         {
             if (version == null)
             {

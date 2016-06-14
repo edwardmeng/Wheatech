@@ -4,11 +4,22 @@ using System.Text;
 
 namespace Wheatech
 {
+    /// <summary>
+    /// Provides culture-specific information about the format of version values.
+    /// </summary>
     public class VersionFormatter : IFormatProvider, ICustomFormatter
     {
+        /// <summary>
+        /// Converts the value of a specified <see cref="Version"/> to an equivalent string representation using specified format and culture-specific formatting information.
+        /// </summary>
+        /// <param name="format">A format string containing formatting specifications.</param>
+        /// <param name="arg">An object to format.</param>
+        /// <param name="formatProvider">An object that supplies format information about the current instance.</param>
+        /// <returns>The string representation of the value of <paramref name="arg"/>, formatted as specified by <paramref name="format"/> and <paramref name="formatProvider"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="arg"/> is null.</exception>
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            if (arg == null) throw new ArgumentNullException("arg");
+            if (arg == null) throw new ArgumentNullException(nameof(arg));
             if (string.IsNullOrEmpty(format)) return string.Empty;
             var version = arg as Version;
             if (version == null) return null;
@@ -22,6 +33,11 @@ namespace Wheatech
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Returns an object of the specified type that provides a version formatting service.
+        /// </summary>
+        /// <param name="formatType">The type of the required formatting service.</param>
+        /// <returns>The current object, if <paramref name="formatType"/> is the same as the type of <see cref="ICustomFormatter"/> or <see cref="Version"/> ; otherwise, null.</returns>
         public object GetFormat(Type formatType)
         {
             return formatType == typeof(ICustomFormatter) || formatType == typeof(Version) ? this : null;
