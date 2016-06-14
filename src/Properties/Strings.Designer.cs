@@ -79,6 +79,33 @@ namespace Wheatech.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The field value &apos;{0}&apos; cannot be converted to {1} for the component property &apos;{2}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string Cannot_Convert_Field {
+            get {
+                return ResourceManager.GetString("Cannot_Convert_Field", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Cannot convert from &apos;{0}&apos; to &apos;{1}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string Cannot_Convert_Type {
+            get {
+                return ResourceManager.GetString("Cannot_Convert_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Cannot convert value &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;. 的本地化字符串。
+        /// </summary>
+        internal static string Cannot_Convert_Value {
+            get {
+                return ResourceManager.GetString("Cannot_Convert_Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Cannot find the type &quot;{0}&quot;. 的本地化字符串。
         /// </summary>
         internal static string Cannot_Find_Type {

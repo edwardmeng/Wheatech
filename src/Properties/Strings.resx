@@ -123,6 +123,15 @@
   <data name="Argument_Cannot_Be_Null_Or_Empty" xml:space="preserve">
     <value>Value cannot be null or an empty string.</value>
   </data>
+  <data name="Cannot_Convert_Field" xml:space="preserve">
+    <value>The field value '{0}' cannot be converted to {1} for the component property '{2}'.</value>
+  </data>
+  <data name="Cannot_Convert_Type" xml:space="preserve">
+    <value>Cannot convert from '{0}' to '{1}'.</value>
+  </data>
+  <data name="Cannot_Convert_Value" xml:space="preserve">
+    <value>Cannot convert value '{0}' from '{1}' to '{2}'.</value>
+  </data>
   <data name="Cannot_Find_Type" xml:space="preserve">
     <value>Cannot find the type "{0}".</value>
   </data>
