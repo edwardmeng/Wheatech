@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Wheatech.Properties;
 
 namespace Wheatech
 {
@@ -112,7 +114,6 @@ namespace Wheatech
         private const string DefaultMediaType = "text/plain";
         private readonly string _mediaType;
         private readonly ReadOnlyNameValueCollection _parameters;
-        private const string UnrecognizedFormat = "Unrecognized data uri format.";
 
         #endregion
 
@@ -288,7 +289,7 @@ namespace Wheatech
             uri = null;
             if (string.IsNullOrEmpty(result.Data))
             {
-                result.SetFailure(ParseFailureKind.Format, UnrecognizedFormat, failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Invalid_Format, failureArgumentName: "uriString");
                 return false;
             }
             if (string.IsNullOrEmpty(result.Encoding))
@@ -305,7 +306,7 @@ namespace Wheatech
                 }
                 catch (FormatException ex)
                 {
-                    result.SetFailure(ParseFailureKind.FormatWithInnerException, UnrecognizedFormat, failureArgumentName: "uriString", innerException: ex);
+                    result.SetFailure(ParseFailureKind.FormatWithInnerException, Strings.DataUri_Invalid_Format, failureArgumentName: "uriString", innerException: ex);
                     return false;
                 }
                 catch (Exception ex)
@@ -314,7 +315,7 @@ namespace Wheatech
                     return false;
                 }
             }
-            result.SetFailure(ParseFailureKind.Format, $"Unrecognized data uri for unknown data encoding: {result.Encoding}.", failureArgumentName: "uriString");
+            result.SetFailure(ParseFailureKind.Format, string.Format(Strings.DataUri_Unknown_Encoding, result.Encoding), failureArgumentName: "uriString");
             return false;
         }
 
@@ -323,22 +324,20 @@ namespace Wheatech
             // data:[<media type>][;charset=<character set>][;base64],<data>
             if (uriString == null)
             {
-                result.SetFailure(ParseFailureKind.ArgumentNull, "The data uri cannot be null.",
-                    failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.ArgumentNull, Strings.DataUri_Cannot_Be_Null, failureArgumentName: nameof(uriString));
                 return false;
             }
             uriString = uriString.Trim();
             if (uriString.Length == 0)
             {
-                result.SetFailure(ParseFailureKind.Format, "The data uri cannot be empty string.",
-                    failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Cannot_Be_Empty, failureArgumentName: nameof(uriString));
                 return false;
             }
             // The data uri must be starts with 'data:'
             const string dataPrefix = "data:";
             if (!uriString.StartsWith(dataPrefix))
             {
-                result.SetFailure(ParseFailureKind.Format, UnrecognizedFormat, failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Invalid_Format, failureArgumentName: nameof(uriString));
                 return false;
             }
             uriString = uriString.Substring(dataPrefix.Length).Trim();
@@ -376,7 +375,7 @@ namespace Wheatech
             var mediaType = getUriSection(null);
             if (!string.IsNullOrEmpty(mediaType) && !Regex.IsMatch(mediaType, "^\\w+\\/\\w+$"))
             {
-                result.SetFailure(ParseFailureKind.Format, $"Unrecognized data uri for invalid media type: {mediaType}.", failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, string.Format(CultureInfo.CurrentCulture, Strings.DataUri_Invalid_MediaType, mediaType), failureArgumentName: nameof(uriString));
                 return false;
             }
             result.MediaType = mediaType;
@@ -388,7 +387,7 @@ namespace Wheatech
                 var parameterName = sectionString.Substring(0, equalIndex).Trim();
                 if (string.IsNullOrEmpty(parameterName))
                 {
-                    result.SetFailure(ParseFailureKind.Format, UnrecognizedFormat, failureArgumentName: "uriString");
+                    result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Invalid_Format, failureArgumentName: nameof(uriString));
                     return false;
                 }
                 result.Parameters.Add(parameterName, sectionString.Substring(equalIndex + 1).Trim());
@@ -396,13 +395,13 @@ namespace Wheatech
             // parse data section
             if (string.IsNullOrEmpty(uriString))
             {
-                result.SetFailure(ParseFailureKind.Format, UnrecognizedFormat, failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Invalid_Format, failureArgumentName: nameof(uriString));
                 return false;
             }
             var commaIndex = uriString.IndexOf(',');
             if (commaIndex < 0)
             {
-                result.SetFailure(ParseFailureKind.Format, UnrecognizedFormat, failureArgumentName: "uriString");
+                result.SetFailure(ParseFailureKind.Format, Strings.DataUri_Invalid_Format, failureArgumentName: nameof(uriString));
                 return false;
             }
             result.Encoding = uriString.Substring(0, commaIndex).Trim();
@@ -457,7 +456,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public Base64DataUri(string mediaType, NameValueCollection parameters, byte[] content) : base(mediaType, parameters)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (content == null) throw new ArgumentNullException(nameof(content), Strings.DataUri_Content_Cannot_Be_Null);
             _content = content;
         }
 
@@ -469,7 +468,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public Base64DataUri(string mediaType, byte[] content) : base(mediaType)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (content == null) throw new ArgumentNullException(nameof(content), Strings.DataUri_Content_Cannot_Be_Null);
             _content = content;
         }
 
@@ -480,7 +479,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public Base64DataUri(byte[] content)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (content == null) throw new ArgumentNullException(nameof(content), Strings.DataUri_Content_Cannot_Be_Null);
             _content = content;
         }
 
@@ -557,7 +556,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public TextDataUri(string mediaType, NameValueCollection parameters, string content) : base(mediaType, parameters)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (string.IsNullOrEmpty(content)) throw new ArgumentException(Strings.DataUri_Content_Cannot_Be_Null_Or_Empty, nameof(content));
             _content = content;
         }
 
@@ -569,7 +568,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public TextDataUri(string mediaType, string content) : base(mediaType)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (string.IsNullOrEmpty(content)) throw new ArgumentException(Strings.DataUri_Content_Cannot_Be_Null_Or_Empty, nameof(content));
             _content = content;
         }
 
@@ -580,7 +579,7 @@ namespace Wheatech
         /// <exception cref="ArgumentNullException"><paramref name="content"/> is null.</exception>
         public TextDataUri(string content)
         {
-            if (content == null) throw new ArgumentNullException(nameof(content));
+            if (string.IsNullOrEmpty(content)) throw new ArgumentException(Strings.DataUri_Content_Cannot_Be_Null_Or_Empty, nameof(content));
             _content = content;
         }
 
