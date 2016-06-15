@@ -155,10 +155,7 @@ namespace Wheatech.ComponentModel
         /// <returns>
         /// A <see cref="IEnumerator{T}" /> that can be used to iterate through the collection.
         /// </returns>
-        IEnumerator<EnumerationMemberDescriptor> IEnumerable<EnumerationMemberDescriptor>.GetEnumerator()
-        {
-            return _descriptors.GetEnumerator();
-        }
+        IEnumerator<EnumerationMemberDescriptor> IEnumerable<EnumerationMemberDescriptor>.GetEnumerator() => _descriptors.GetEnumerator();
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -166,9 +163,6 @@ namespace Wheatech.ComponentModel
         /// <returns>
         /// An <see cref="IEnumerator" /> object that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator GetEnumerator()
-        {
-            return ((IEnumerable<EnumerationMemberDescriptor>)this).GetEnumerator();
-        }
+        public IEnumerator GetEnumerator() => ((IEnumerable<EnumerationMemberDescriptor>)this).GetEnumerator();
     }
 }

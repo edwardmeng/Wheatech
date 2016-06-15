@@ -61,16 +61,40 @@ namespace Wheatech
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the simple name of the assembly.
+        /// </summary>
+        /// <value>The simple name of the assembly.</value>
         public string ShortName => _shortName;
 
+        /// <summary>
+        /// Gets or sets the major, minor, build, and revision numbers of the assembly.
+        /// </summary>
+        /// <value>An object that represents the major, minor, build, and revision numbers of the assembly.</value>
         public System.Version Version => _version;
 
+        /// <summary>
+        /// Gets the public key token, which is the last 8 bytes of the SHA-1 hash of the public key under which the application or assembly is signed.
+        /// </summary>
+        /// <value>A byte array that contains the public key token.</value>
         public byte[] PublicKeyToken => _publicKeyToken;
 
+        /// <summary>
+        /// Gets or sets the culture supported by the assembly.
+        /// </summary>
+        /// <value>An object that represents the culture supported by the assembly.</value>
         public CultureInfo Culture => _culture;
 
+        /// <summary>
+        /// Gets or sets the name of the culture associated with the assembly.
+        /// </summary>
+        /// <value>The culture name.</value>
         public string CultureName => _culture?.Name;
 
+        /// <summary>
+        /// Gets or sets a value that identifies the processor and bits-per-word of the platform targeted by an executable.
+        /// </summary>
+        /// <value>One of the enumeration values that identifies the processor and bits-per-word of the platform targeted by an executable.</value>
         public ProcessorArchitecture Architecture => _processorArchitecture;
 
         #endregion

@@ -45,22 +45,35 @@ namespace Wheatech.ComponentModel
         /// </returns>
         protected string AliasNameValue { get; set; }
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Returns a value indicating whether this instance is equal to a specified object.
+        /// </summary>
+        /// <param name="value">The object to compare to this instance.</param>
+        /// <returns><c>true</c> if <paramref name="value"/> is an instance of <see cref="AliasNameAttribute"/> and equals the value of this instance; otherwise, <c>false</c>.</returns>
+        public override bool Equals(object value)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            var other = obj as AliasNameAttribute;
+            if (ReferenceEquals(null, value)) return false;
+            if (ReferenceEquals(this, value)) return true;
+            var other = value as AliasNameAttribute;
             return other != null && string.Equals(AliasNameValue, other.AliasNameValue);
         }
 
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
             unchecked
             {
-                return (base.GetHashCode() * 397) ^ (AliasNameValue != null ? AliasNameValue.GetHashCode() : 0);
+                return (base.GetHashCode() * 397) ^ (AliasNameValue?.GetHashCode() ?? 0);
             }
         }
 
+        /// <summary>
+        /// Determines if this attribute is the default.
+        /// </summary>
+        /// <returns><c>true</c> if the attribute is the default value for this attribute class; otherwise, <c>false</c>.</returns>
         public override bool IsDefaultAttribute()
         {
             return Equals(Default);

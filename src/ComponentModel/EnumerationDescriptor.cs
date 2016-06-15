@@ -40,10 +40,7 @@ namespace Wheatech.ComponentModel
         /// <typeparam name="T">A <see cref="Type"/> that represents the enumeration to get members for.</typeparam>
         /// <returns>An <see cref="EnumerationMemberDescriptorCollection"/> with the members for a specified type of enumeration.</returns>
         public static EnumerationMemberDescriptorCollection GetMembers<T>()
-            where T : struct
-        {
-            return GetMembers(typeof(T));
-        }
+            where T : struct => GetMembers(typeof(T));
 
         /// <summary>
         /// Returns the member descriptor for the specified enumeration member.

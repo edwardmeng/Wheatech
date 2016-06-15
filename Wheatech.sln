@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheatech", "src\Wheatech.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheatech.UnitTest", "tests\Wheatech.UnitTest.csproj", "{204F4527-4078-4ABA-98EA-7FB0B5529D2C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{0303C7F0-4D26-402B-B64A-F009160D7D14}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\Wheatech.nuspec = nuget\Wheatech.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
