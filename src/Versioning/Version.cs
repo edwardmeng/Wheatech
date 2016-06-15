@@ -410,6 +410,24 @@ namespace Wheatech
             return Compare(version1, version2) >= 0;
         }
 
+        /// <summary>
+        /// Defines an implicit conversion of a <see cref="System.Version"/> to a <see cref="Version"/>.
+        /// </summary>
+        /// <param name="version">The <see cref="System.Version"/> to convert.</param>
+        public static implicit operator Version(System.Version version)
+        {
+            return version == null ? null : new Version(version);
+        }
+
+        /// <summary>
+        /// Defines an explicit conversion of a <see cref="Version"/> to a <see cref="System.Version"/>.
+        /// </summary>
+        /// <param name="version">The value to convert.</param>
+        public static explicit operator System.Version(Version version)
+        {
+            return version?._version;
+        }
+
         #endregion
 
         #region Parse
