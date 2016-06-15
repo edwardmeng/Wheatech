@@ -70,6 +70,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataUriTest.cs" />
+    <Compile Include="LazyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
