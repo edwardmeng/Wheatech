@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -48,9 +49,16 @@ namespace Wheatech
             return new TypeDescriptorContext(property, instance);
         }
 
+        /// <summary>
+        /// Creates a data object and sets the properties specified by name/value pairs in the dictionary.
+        /// </summary>
+        /// <param name="component">The data object to set properties.</param>
+        /// <param name="fieldValues">The dictionary contains the name/value pairs.</param>
+        /// <exception cref="AggregateException">Any property cannot be converted from <paramref name="fieldValues"/>.</exception>
         public static void BuildObject(object component, IDictionary fieldValues)
         {
             var properties = TypeDescriptor.GetProperties(component);
+            var validationErrors = new List<Exception>();
             foreach (DictionaryEntry entry in fieldValues)
             {
                 string name = entry.Key.ToString();
@@ -62,9 +70,10 @@ namespace Wheatech
                     {
                         value = ConvertValue(value, descriptor.PropertyType, descriptor.Converter, CreateTypeDescriptorContext(component, descriptor));
                     }
-                    catch (Exception ex) when(ex is FormatException || ex is ArgumentException || ex is OverflowException)
+                    catch (Exception ex) when (ex is FormatException || ex is ArgumentException || ex is OverflowException)
                     {
-                        throw new FormatException(string.Format(CultureInfo.CurrentCulture, Strings.Cannot_Convert_Field, value, descriptor.PropertyType, name), ex);
+                        validationErrors.Add(new FormatException(string.Format(CultureInfo.CurrentCulture, Strings.Cannot_Convert_Field, value, descriptor.PropertyType, name), ex));
+                        continue;
                     }
                     var underlyingType = Nullable.GetUnderlyingType(descriptor.PropertyType);
                     if (value != null && underlyingType != null)
@@ -72,14 +81,25 @@ namespace Wheatech
                         var type = value.GetType();
                         if (underlyingType != type)
                         {
-                            throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Strings.Cannot_Convert_Field, value, $"Nullable<{underlyingType.FullName}>", name));
+                            validationErrors.Add(new FormatException(string.Format(CultureInfo.CurrentCulture, Strings.Cannot_Convert_Field, value, $"Nullable<{underlyingType.FullName}>", name)));
+                            continue;
                         }
                     }
                     descriptor.SetValue(component, value);
                 }
             }
+            if (validationErrors.Count > 0)
+            {
+                throw new AggregateException(validationErrors);
+            }
         }
 
+        /// <summary>
+        /// Converts the given object to the given type.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="destinationType"></param>
+        /// <returns></returns>
         public static object ConvertValue(object value, Type destinationType)
         {
             return ConvertValue(value, destinationType, null, null);

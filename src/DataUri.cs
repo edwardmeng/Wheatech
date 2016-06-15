@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using Wheatech.Properties;
 
 namespace Wheatech
@@ -294,7 +295,7 @@ namespace Wheatech
             }
             if (string.IsNullOrEmpty(result.Encoding))
             {
-                uri = new TextDataUri(result.MediaType, result.Parameters, result.Data);
+                uri = new TextDataUri(result.MediaType, result.Parameters, HttpUtility.UrlDecode(result.Data));
                 return true;
             }
             if (string.Equals(result.Encoding, "base64", StringComparison.InvariantCultureIgnoreCase))
