@@ -5,6 +5,9 @@ using System.Web.Hosting;
 
 namespace Wheatech
 {
+    /// <summary>
+    /// Provides a set of methods to resolve path.
+    /// </summary>
     public static class PathUtils
     {
         private static bool IsAbsolutePhysical(string path)

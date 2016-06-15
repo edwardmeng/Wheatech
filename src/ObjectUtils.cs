@@ -11,6 +11,9 @@ using Wheatech.Properties;
 
 namespace Wheatech
 {
+    /// <summary>
+    /// Provides a set of methods to convert value.
+    /// </summary>
     public static class ObjectUtils
     {
         private class TypeDescriptorContext : ITypeDescriptorContext
@@ -97,19 +100,37 @@ namespace Wheatech
         /// <summary>
         /// Converts the given object to the given type.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="destinationType"></param>
-        /// <returns></returns>
+        /// <param name="value">An object that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <returns>An object whose type is <paramref name="destinationType"/> and whose value is equivalent to <paramref name="value"/>.</returns>
+        /// <exception cref="InvalidOperationException">This conversion is not supported.</exception>
         public static object ConvertValue(object value, Type destinationType)
         {
             return ConvertValue(value, destinationType, null, null);
         }
 
+        /// <summary>
+        /// Converts the given object to the given type by using the specified converter and context.
+        /// </summary>
+        /// <param name="value">An object that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <param name="converter">The converter to convert value.</param>
+        /// <param name="context">The type descriptor context.</param>
+        /// <returns>An object whose type is <paramref name="destinationType"/> and whose value is equivalent to <paramref name="value"/>.</returns>
+        /// <exception cref="InvalidOperationException">This conversion is not supported.</exception>
         public static object ConvertValue(object value, Type destinationType, TypeConverter converter, ITypeDescriptorContext context = null)
         {
             return ConvertValue(value, destinationType, converter, context, null);
         }
 
+        /// <summary>
+        /// Converts the given object to the given type.
+        /// </summary>
+        /// <param name="value">An object that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <param name="name">The target member name.</param>
+        /// <returns>An object whose type is <paramref name="destinationType"/> and whose value is equivalent to <paramref name="value"/>.</returns>
+        /// <exception cref="InvalidOperationException">This conversion is not supported.</exception>
         public static object ConvertValue(object value, Type destinationType, string name)
         {
             return ConvertValue(value, destinationType, null, null, name);
@@ -230,11 +251,24 @@ namespace Wheatech
             }
         }
 
+        /// <summary>
+        /// Returns whether the given object can be converted to the specified type.
+        /// </summary>
+        /// <param name="value">An object that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <returns><c>true</c> if given object can perform the conversion; otherwise, <c>false</c>.</returns>
         public static bool CanConvertValue(object value, Type destinationType)
         {
             return CanConvertValue(value, destinationType, null);
         }
 
+        /// <summary>
+        /// Returns whether the given object can be converted to the specified type by using the specified converter.
+        /// </summary>
+        /// <param name="value">An object that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <param name="converter">The converter to convert value.</param>
+        /// <returns><c>true</c> if given object can perform the conversion; otherwise, <c>false</c>.</returns>
         public static bool CanConvertValue(object value, Type destinationType, TypeConverter converter)
         {
             if (value == null) return !destinationType.IsValueType;
@@ -265,6 +299,12 @@ namespace Wheatech
             return CanConvertType(sourceType, elementType);
         }
 
+        /// <summary>
+        /// Returns whether the given type can be converted to the specified type by using the specified converter.
+        /// </summary>
+        /// <param name="sourceType">The given type that to be converted.</param>
+        /// <param name="destinationType">The type of object to be converted to.</param>
+        /// <returns><c>true</c> if given type can perform the conversion; otherwise, <c>false</c>.</returns>
         public static bool CanConvertType(Type sourceType, Type destinationType)
         {
             if (destinationType.IsAssignableFrom(sourceType)) return true;

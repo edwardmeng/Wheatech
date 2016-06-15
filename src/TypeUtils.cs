@@ -12,7 +12,7 @@ using Wheatech.Properties;
 namespace Wheatech
 {
     /// <summary>
-    /// Provides a set of methods to help manage the environment variables.
+    /// Provides a set of methods to resolve type from type name.
     /// </summary>
     public static class TypeUtils
     {
