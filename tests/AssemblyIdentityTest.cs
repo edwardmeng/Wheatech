@@ -214,7 +214,7 @@ namespace Wheatech.UnitTest
             {
                 throw new ArgumentException("Invalid public key token", "tokenString");
             }
-            Assert.Equal(assemblyString, new AssemblyIdentity(shortName, string.IsNullOrEmpty(version) ? null : Version.Parse(version), culture, token).ToString());
+            Assert.Equal(assemblyString, new AssemblyIdentity(shortName, string.IsNullOrEmpty(version) ? null : System.Version.Parse(version), culture, token).ToString());
         }
     }
 }

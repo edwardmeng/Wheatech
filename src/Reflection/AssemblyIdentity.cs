@@ -13,7 +13,7 @@ namespace Wheatech
 
         private string _originalString;
         private string _shortName;
-        private Version _version;
+        private System.Version _version;
         private byte[] _publicKeyToken;
         private CultureInfo _culture;
         private ProcessorArchitecture _processorArchitecture;
@@ -28,7 +28,7 @@ namespace Wheatech
         {
         }
 
-        public AssemblyIdentity(string shortName, Version version = null, CultureInfo culture = null, byte[] publicKeyToken = null,
+        public AssemblyIdentity(string shortName, System.Version version = null, CultureInfo culture = null, byte[] publicKeyToken = null,
             ProcessorArchitecture architecture = ProcessorArchitecture.None)
         {
             if (string.IsNullOrEmpty(shortName))
@@ -63,7 +63,7 @@ namespace Wheatech
 
         public string ShortName => _shortName;
 
-        public Version Version => _version;
+        public System.Version Version => _version;
 
         public byte[] PublicKeyToken => _publicKeyToken;
 
@@ -116,8 +116,8 @@ namespace Wheatech
                 }
             }
             if (string.IsNullOrEmpty(shortName)) return false;
-            Version version = null;
-            if (!string.IsNullOrEmpty(versionText) && !Version.TryParse(versionText, out version)) return false;
+            System.Version version = null;
+            if (!string.IsNullOrEmpty(versionText) && !System.Version.TryParse(versionText, out version)) return false;
             CultureInfo culture;
             if (!TryParseCulture(cultureName, out culture)) return false;
             byte[] publicKeyToken;
@@ -238,7 +238,7 @@ namespace Wheatech
         {
             if (_serializationInfo == null) return;
             _shortName = _serializationInfo.GetString("Name");
-            _version = (Version)_serializationInfo.GetValue("Version", typeof(Version));
+            _version = (System.Version)_serializationInfo.GetValue("Version", typeof(System.Version));
             _publicKeyToken = (byte[])_serializationInfo.GetValue("PublicKeyToken", typeof(byte[]));
             int culture = _serializationInfo.GetInt32("Culture");
             if (culture != -1) _culture = new CultureInfo(culture);
