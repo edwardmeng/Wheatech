@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wheatech.UnitTest", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{0303C7F0-4D26-402B-B64A-F009160D7D14}"
 	ProjectSection(SolutionItems) = preProject
+		nuget\build.cmd = nuget\build.cmd
+		nuget\nuget.config = nuget\nuget.config
 		nuget\Wheatech.nuspec = nuget\Wheatech.nuspec
 	EndProjectSection
 EndProject

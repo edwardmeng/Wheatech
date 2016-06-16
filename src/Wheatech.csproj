@@ -105,12 +105,6 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <!-- Only download a new copy of nuget.exe if we don't have a copy available -->
-    <MakeDir Condition="!Exists('..\nuget\lib\')" Directories="..\nuget\lib\" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\nuget\lib\" />
-    <Exec Command="..\tools\nuget pack ..\nuget\Wheatech.nuspec" />
-  </Target>
   <Import Project="..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets" Condition="Exists('..\packages\MSBuildTasks.1.5.0.196\build\MSBuildTasks.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
