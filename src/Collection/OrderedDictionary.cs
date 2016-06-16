@@ -590,7 +590,7 @@ namespace Wheatech.Collection
         IEnumerator IEnumerable.GetEnumerator() => List.GetEnumerator();
 
         /// <summary>
-        ///     The IEnumerable<out T>.GetEnumerator() implementation.
+        ///     The <see cref="IEnumerable{T}.GetEnumerator()"/> implementation.
         /// </summary>
         /// <returns>
         ///     The <see cref="IEnumerator" />.

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Wheatech
 {
     /// <summary>
-    /// An comparer for SemanticVersion type.
+    /// An comparer for <see cref="Version"/> type.
     /// </summary>
     public sealed class VersionComparer : IEqualityComparer<Version>, IComparer<Version>
     {
@@ -37,7 +37,7 @@ namespace Wheatech
         #region Constructors
 
         /// <summary>
-        /// Creates a VersionComparer using the default mode.
+        /// Initializes a new instance of the <see cref="VersionComparer"/> using the default mode.
         /// </summary>
         public VersionComparer()
         {
@@ -45,7 +45,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a VersionComparer that respects the given comparison mode.
+        /// Initializes a new instance of the <see cref="VersionComparer"/> that respects the given comparison mode.
         /// </summary>
         /// <param name="versionComparison">comparison mode</param>
         public VersionComparer(VersionComparison versionComparison)
@@ -58,8 +58,15 @@ namespace Wheatech
         #region Methods
 
         /// <summary>
-        /// Determines if both versions are equal.
+        /// Returns a value indicates whether two versions are equal.
         /// </summary>
+        /// <param name="x">A version to compare to <paramref name="y"/>.</param>
+        /// <param name="y">A version to compare to <paramref name="x"/>.</param>
+        /// <value>
+        /// <c>true</c> if <paramref name="x"/> and <paramref name="y"/> refer to the same object, 
+        /// or <paramref name="x"/> and <paramref name="y"/> are equal, 
+        /// or <paramref name="x"/> and <paramref name="y"/> are null; otherwise, <c>false</c>.
+        /// </value>
         public bool Equals(Version x, Version y)
         {
             return Compare(x, y) == 0;
@@ -75,8 +82,10 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Gives a hash code based on the normalized version string.
+        /// Gets the hash code for the specified <see cref="Version"/>.
         /// </summary>
+        /// <param name="version">The <see cref="Version"/> to calculate hash code.</param>
+        /// <returns>A 32-bit signed hash code calculated from the value of the <paramref name="version"/> parameter.</returns>
         public int GetHashCode(Version version)
         {
             if (ReferenceEquals(version, null)) return 0;
@@ -98,8 +107,13 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Compare versions.
+        /// Compares two versions and returns an indication of their relative sort order.
         /// </summary>
+        /// <param name="x">A version to compare to <paramref name="y"/>.</param>
+        /// <param name="y">A version to compare to <paramref name="x"/>.</param>
+        /// <returns>
+        /// A signed integer that indicates the relative values of <paramref name="x"/> and <paramref name="y"/>.
+        /// </returns>
         public int Compare(Version x, Version y)
         {
             if (ReferenceEquals(x, y)) return 0;

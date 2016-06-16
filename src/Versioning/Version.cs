@@ -24,9 +24,9 @@ namespace Wheatech
         #region Constructors
 
         /// <summary>
-        /// Creates a Version using Version.Parse(string)
+        /// Initializes a new instance of the <see cref="Version"/> using <see cref="Version.Parse(string)"/>
         /// </summary>
-        /// <param name="version">Version string</param>
+        /// <param name="version">The version string.</param>
         /// <exception cref="ArgumentException"><paramref name="version"/> is null, empty string or invalid format.</exception>
         public Version(string version)
             : this(Parse(version))
@@ -34,7 +34,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version from an existing Version
+        /// Initializes a new instance of the <see cref="Version"/> from an existing <see cref="Version"/>
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="version"/> is null.</exception>
         public Version(Version version)
@@ -44,7 +44,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version X.Y.Z
+        /// Initializes a new instance of the <see cref="Version"/> X.Y.Z
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
@@ -56,7 +56,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version X.Y.Z-alpha
+        /// Initializes a new instance of the <see cref="Version"/> X.Y.Z-alpha
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
@@ -69,7 +69,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version X.Y.Z-alpha+build01
+        /// Initializes a new instance of the <see cref="Version"/> X.Y.Z-alpha+build01
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
@@ -83,7 +83,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version X.Y.Z-alpha.1.2+build01
+        /// Initializes a new instance of the <see cref="Version"/> X.Y.Z-alpha.1.2+build01
         /// </summary>
         /// <param name="major">X.y.z</param>
         /// <param name="minor">x.Y.z</param>
@@ -97,7 +97,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version from a .NET Version with additional release labels, build metadata.
+        /// Initializes a new instance of the <see cref="Version"/> from a .NET Version with additional release labels, build metadata.
         /// </summary>
         /// <param name="version">Version numbers</param>
         /// <param name="releaseLabel">prerelease labels</param>
@@ -109,7 +109,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version W.X.Y.Z
+        /// Initializes a new instance of the <see cref="Version"/> W.X.Y.Z
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
@@ -120,8 +120,9 @@ namespace Wheatech
             : this(major, minor, patch, revision, Enumerable.Empty<string>(), null)
         {
         }
+
         /// <summary>
-        /// Creates a Version W.X.Y.Z-alpha+build01
+        /// Initializes a new instance of the <see cref="Version"/> W.X.Y.Z-alpha+build01
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
@@ -136,7 +137,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version W.X.Y.Z-alpha.1+build01
+        /// Initializes a new instance of the <see cref="Version"/> W.X.Y.Z-alpha.1+build01
         /// </summary>
         /// <param name="major">W.x.y.z</param>
         /// <param name="minor">w.X.y.z</param>
@@ -151,7 +152,7 @@ namespace Wheatech
         }
 
         /// <summary>
-        /// Creates a Version from a .NET Version with additional release labels, build metadata.
+        /// Initializes a new instance of the <see cref="Version"/> from a .NET Version with additional release labels, build metadata.
         /// </summary>
         /// <param name="version">Version numbers</param>
         /// <param name="releaseLabels">prerelease labels</param>
@@ -363,48 +364,66 @@ namespace Wheatech
         #region Operators
 
         /// <summary>
-        /// ==
+        /// Returns a value that indicates whether two <see cref="Version"/> values are equal.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> and <paramref name="version2"/> are equal; otherwise, <c>false</c>.</returns>
         public static bool operator ==(Version version1, Version version2)
         {
             return Compare(version1, version2) == 0;
         }
 
         /// <summary>
-        /// !=
+        /// Returns a value that indicates whether two <see cref="Version"/> objects have different values.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> and <paramref name="version2"/> are not equal; otherwise, <c>false</c>.</returns>
         public static bool operator !=(Version version1, Version version2)
         {
             return Compare(version1, version2) != 0;
         }
 
         /// <summary>
-        ///     &lt;
+        /// Returns a value indicating whether a specified <see cref="Version"/> is less than another specified <see cref="Version"/>.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> is less than <paramref name="version2"/>; otherwise, <c>false</c>.</returns>
         public static bool operator <(Version version1, Version version2)
         {
             return Compare(version1, version2) < 0;
         }
 
         /// <summary>
-        ///     &lt;=
+        /// Returns a value indicating whether a specified <see cref="Version"/> is less than or equal to another specified <see cref="Version"/>.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> is less than or equal to <paramref name="version2"/>; otherwise, <c>false</c>.</returns>
         public static bool operator <=(Version version1, Version version2)
         {
             return Compare(version1, version2) <= 0;
         }
 
         /// <summary>
-        /// >
+        /// Returns a value indicating whether a specified <see cref="Version"/> is greater than another specified <see cref="Version"/>.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> is greater than <paramref name="version2"/>; otherwise, <c>false</c>.</returns>
         public static bool operator >(Version version1, Version version2)
         {
             return Compare(version1, version2) > 0;
         }
 
         /// <summary>
-        /// >=
+        /// Returns a value indicating whether a specified <see cref="Version"/> is greater than or equal to another specified <see cref="Version"/>.
         /// </summary>
+        /// <param name="version1">The first value to compare.</param>
+        /// <param name="version2">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="version1"/> is greater than or equal to <paramref name="version2"/>; otherwise, <c>false</c>.</returns>
         public static bool operator >=(Version version1, Version version2)
         {
             return Compare(version1, version2) >= 0;
@@ -523,6 +542,8 @@ namespace Wheatech
         /// <summary>
         /// Parse a version string
         /// </summary>
+        /// <param name="value">The string to parse.</param>
+        /// <param name="version">The instance that will contain the parsed value. If the method returns <c>true</c>, result contains a valid version. If the method returns <c>false</c>, result is null.</param>
         /// <returns>false if the version is not a strict semver</returns>
         public static bool TryParse(string value, out Version version)
         {
@@ -571,6 +592,7 @@ namespace Wheatech
         /// <summary>
         /// Parses a version string using strict version rules.
         /// </summary>
+        /// <param name="value">The string to parse.</param>
         /// <exception cref="ArgumentException"><paramref name="value"/> is null, empty string or invalid format.</exception>
         public static Version Parse(string value)
         {

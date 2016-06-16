@@ -22,22 +22,26 @@ namespace Wheatech.Collection
         new TValue this[int index] { get; set; }
 
         /// <summary>  
-        /// Adds an entry with the specified key and value into the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> collection with the lowest available index.  
+        /// Adds an entry with the specified key and value into the <see cref="IOrderedDictionary{TKey,TValue}"/> collection with the lowest available index.  
         /// </summary>  
         /// <param name="key">The key of the entry to add.</param>  
         /// <param name="value">The value of the entry to add.</param>  
         /// <returns>The index of the newly added entry.</returns>  
         /// <remarks>  
-        /// You can also use the <see cref="System.Collections.Generic.IDictionary{TKey,TValue}.Item(TKey)"/> property to add new elements by setting the value of a key that does not exist in the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> collection; however, if the specified key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see>, setting the <see cref="System.Collections.Generic.IDictionary{TKey,TValue}.Item(TKey)"/> property overwrites the old value. In contrast, the <see cref="Add"/> method does not modify existing elements.  
+        /// You can also use the <see cref="System.Collections.Generic.IDictionary{TKey,TValue}.Item(TKey)"/> property 
+        /// to add new elements by setting the value of a key that does not exist in the <see cref="IOrderedDictionary{TKey,TValue}"/> collection; 
+        /// however, if the specified key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"/>, 
+        /// setting the <see cref="System.Collections.Generic.IDictionary{TKey,TValue}.Item(TKey)"/> property overwrites the old value. 
+        /// In contrast, the <see cref="Add"/> method does not modify existing elements.  
         /// </remarks>  
-        /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see>.</exception>  
-        /// <exception cref="NotSupportedException">The <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> is read-only.<br/>  
+        /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"/>.</exception>  
+        /// <exception cref="NotSupportedException">The <see cref="IOrderedDictionary{TKey,TValue}"/> is read-only.<br/>  
         /// -or-<br/>  
-        /// The <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> has a fixed size.</exception>  
+        /// The <see cref="IOrderedDictionary{TKey,TValue}"/> has a fixed size.</exception>  
         new int Add(TKey key, TValue value);
 
         /// <summary>  
-        /// Inserts a new entry into the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> collection with the specified key and value at the specified index.  
+        /// Inserts a new entry into the <see cref="IOrderedDictionary{TKey,TValue}"/> collection with the specified key and value at the specified index.  
         /// </summary>  
         /// <param name="index">The zero-based index at which the element should be inserted.</param>  
         /// <param name="key">The key of the entry to add.</param>  
@@ -45,10 +49,12 @@ namespace Wheatech.Collection
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>  
         /// -or-<br/>  
         /// <paramref name="index"/> is greater than <see cref="System.Collections.ICollection.Count"/>.</exception>  
-        /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see>.</exception>  
-        /// <exception cref="NotSupportedException">The <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> is read-only.<br/>  
+        /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="IOrderedDictionary{TKey,TValue}"/>.</exception>  
+        /// <exception cref="NotSupportedException">
+        /// The <see cref="IOrderedDictionary{TKey,TValue}"/> is read-only.<br/>  
         /// -or-<br/>  
-        /// The <see cref="IOrderedDictionary{TKey,TValue}"> IOrderedDictionary&lt;TKey,TValue&gt; </see> has a fixed size.</exception>  
+        /// The <see cref="IOrderedDictionary{TKey,TValue}"/> has a fixed size.
+        /// </exception>  
         void Insert(int index, TKey key, TValue value);
     }
 }

@@ -47,6 +47,12 @@ namespace Wheatech
 
         private static readonly ConcurrentDictionary<Tuple<Type, Type>, Func<ITypeDescriptorContext, object, object>> _converters = new ConcurrentDictionary<Tuple<Type, Type>, Func<ITypeDescriptorContext, object, object>>();
 
+        /// <summary>
+        /// Create new instance of <see cref="ITypeDescriptorContext"/>.
+        /// </summary>
+        /// <param name="instance">The relative object instance.</param>
+        /// <param name="property">The relative property.</param>
+        /// <returns>An instance of <see cref="ITypeDescriptorContext"/>.</returns>
         public static ITypeDescriptorContext CreateTypeDescriptorContext(object instance, PropertyDescriptor property)
         {
             return new TypeDescriptorContext(property, instance);
