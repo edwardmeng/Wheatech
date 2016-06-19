@@ -228,7 +228,7 @@ namespace Wheatech
             AssemblyIdentity identity;
             if (!TryParse(assemblyString, out identity))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, "The assembly string format is invalid: {0}", assemblyString), nameof(assemblyString));
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.AssemblyString_InvalidFormat, assemblyString), nameof(assemblyString));
             }
             return identity;
         }

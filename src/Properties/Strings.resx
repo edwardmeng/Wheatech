@@ -171,4 +171,7 @@
   <data name="InvalidVersion" xml:space="preserve">
     <value>'{0}' is not a valid version string.</value>
   </data>
+  <data name="AssemblyString_InvalidFormat" xml:space="preserve">
+    <value>The assembly string format is invalid: {0}.</value>
+  </data>
 </root>

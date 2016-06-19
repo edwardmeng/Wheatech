@@ -115,6 +115,15 @@ namespace Wheatech.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The assembly string format is invalid: {0}. 的本地化字符串。
+        /// </summary>
+        internal static string AssemblyString_InvalidFormat {
+            get {
+                return ResourceManager.GetString("AssemblyString_InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The field value &apos;{0}&apos; cannot be converted to {1} for the component property &apos;{2}&apos;. 的本地化字符串。
         /// </summary>
         internal static string Cannot_Convert_Field {
