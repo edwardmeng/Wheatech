@@ -35,12 +35,13 @@ call :ExecuteCmd ..\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe 
 IF %ERRORLEVEL% NEQ 0 goto error
 
 echo Packaging...
-set libtmp="%cd%\lib\"
+set libtmp=%cd%\lib\
 set packagestmp="%cd%\packages"
-if not exist %libtmp% mkdir %libtmp%
+if not exist %libtmp%net461\ mkdir %libtmp%net461\
 if not exist %packagestmp% mkdir %packagestmp%
 
-copy ..\src\bin\%config%\Wheatech.dll %libtmp% /Y
+copy ..\src\bin\%config%\Wheatech.dll %libtmp%net461\ /Y
+copy ..\src\bin\%config%\Wheatech.xml %libtmp%net461\ /Y
 
 call :ExecuteCmd ..\tools\nuget.exe pack "%cd%\Wheatech.nuspec" -OutputDirectory %packagestmp% %version%
 IF %ERRORLEVEL% NEQ 0 goto error
