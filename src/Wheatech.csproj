@@ -70,7 +70,6 @@
     <Compile Include="Reflection\AssemblyIdentity.cs" />
     <Compile Include="Reflection\AssemblyIdentityComparer.cs" />
     <Compile Include="Reflection\AssemblyIdentityComparison.cs" />
-    <Compile Include="Reflection\AssemblyStartupAttribute.cs" />
     <Compile Include="Versioning\IVersionComparator.cs" />
     <Compile Include="Versioning\Version.cs" />
     <Compile Include="TypeUtils.cs" />

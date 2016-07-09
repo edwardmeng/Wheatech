@@ -48,9 +48,10 @@ namespace Wheatech
         /// <summary>
         /// Maps the specified virtual path to a physical path.
         /// </summary>
+        /// <param name="basePath">The base path to resolve the virtual path to absolute path.</param>
         /// <param name="virtualPath">The virtual path (absolute or relative) for the current environment.</param>
         /// <returns>The physical path specified by <paramref name="virtualPath"/>.</returns>
-        public static string ResolvePath(string virtualPath)
+        public static string ResolvePath(string basePath, string virtualPath)
         {
             if (IsUri(virtualPath))
             {
@@ -58,7 +59,7 @@ namespace Wheatech
             }
             if (!IsAbsolutePhysical(virtualPath))
             {
-                if (HostingEnvironment.IsHosted)
+                if (HostingEnvironment.IsHosted && AppDomain.CurrentDomain.BaseDirectory == basePath)
                 {
                     try
                     {
@@ -72,9 +73,19 @@ namespace Wheatech
                 {
                     virtualPath = virtualPath.Substring(2);
                 }
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, virtualPath);
+                return Path.Combine(basePath, virtualPath);
             }
             return virtualPath;
+        }
+
+        /// <summary>
+        /// Maps the specified virtual path to a physical path.
+        /// </summary>
+        /// <param name="virtualPath">The virtual path (absolute or relative) for the current environment.</param>
+        /// <returns>The physical path specified by <paramref name="virtualPath"/>.</returns>
+        public static string ResolvePath(string virtualPath)
+        {
+            return ResolvePath(AppDomain.CurrentDomain.BaseDirectory, virtualPath);
         }
     }
 }
