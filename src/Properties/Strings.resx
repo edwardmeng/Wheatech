@@ -174,4 +174,7 @@
   <data name="AssemblyString_InvalidFormat" xml:space="preserve">
     <value>The assembly string format is invalid: {0}.</value>
   </data>
+  <data name="Cannot_exit_up_top_directory" xml:space="preserve">
+    <value>Cannot use a leading .. to exit above the top directory.</value>
+  </data>
 </root>

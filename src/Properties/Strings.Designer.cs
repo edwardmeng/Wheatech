@@ -151,6 +151,15 @@ namespace Wheatech.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Cannot use a leading .. to exit above the top directory. 的本地化字符串。
+        /// </summary>
+        internal static string Cannot_exit_up_top_directory {
+            get {
+                return ResourceManager.GetString("Cannot_exit_up_top_directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Cannot find the type &quot;{0}&quot;. 的本地化字符串。
         /// </summary>
         internal static string Cannot_Find_Type {
